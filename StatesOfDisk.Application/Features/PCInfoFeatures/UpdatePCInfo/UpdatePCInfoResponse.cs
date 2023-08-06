@@ -1,10 +1,8 @@
-﻿using StatesOfDisk.Domain.Common;
+﻿namespace StatesOfDisk.Application.Features.PCInfoFeatures.UpdatePCInfo;
 
-namespace StatesOfDisk.Domain.Entities;
-
-public sealed class PCInfo : BaseEntity
+public sealed record UpdatePCInfoResponse
 {
-    //public string Id { get; set; }
+    public string Id { get; set; }
     public DateTimeOffset? UpdateTimestamp { get; set; }
     public string? ComputerName { get; set; }
     public decimal? DiskCfreeSpace { get; set; }

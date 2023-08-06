@@ -1,9 +1,9 @@
-﻿namespace StatesOfDisk.Application.Features.UserFeatures.CreateUser;
+﻿namespace StatesOfDisk.Application.Features.PCInfoFeatures.CreatePCInfo;
 
 public sealed record CreatePCInfoResponse
 {
-    public Guid Id { get; set; }
+    public string Id { get; set; }
     public DateTimeOffset? UpdateTimestamp { get; set; }
-    public string? ComputerNane { get; set; }
+    public string? ComputerName { get; set; }
     public decimal? DiskCfreeSpace { get; set; }
 }

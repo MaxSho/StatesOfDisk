@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using StatesOfDisk.Domain.Entities;
 
-namespace StatesOfDisk.Application.Features.UserFeatures.GetAllPCInfo;
+namespace StatesOfDisk.Application.Features.PCInfoFeatures.GetAllPCInfo;
 
 public sealed class GetAllPCInfoMapper : Profile
 {

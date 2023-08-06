@@ -5,33 +5,44 @@ using System.Linq;
 using System.Management.Automation;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleAppStatesOfDisk
 {
-    internal class Client
+    internal sealed class Client : IDisposable
     {
-        public Client()
-        {
+        private static readonly Lazy<Client> instance = new Lazy<Client>(() => new Client());
 
-        }
-        public void SendRequest(string request)
+        private Server _server;
+        private Timer? _timer;
+
+        private Client()
         {
-            // Логіка відправки запиту на сервер
-             ConnectToServer(request);
-           
+            _server = new Server();
+            
         }
 
-        private void ConnectToServer(string request)
-        {
-            // Логіка підключення до сервера (наприклад, через мережу)
-            Server server = new Server();
-            server.ProcessRequest("");
-        }
-        public void SendResponse(Server server)
-        {
-            server.ProcessRequest("");
+        public static Client Instance => instance.Value;
 
+        public void Dispose()
+        {
+            _timer?.Dispose();
+        }
+
+        public void SendRequestPCInfo()
+        {
+            _server.RequestPCInfoUpdate();
+        }
+
+        public void SendRequestPCInfoInTimer()
+        {
+            _timer = new Timer(_ =>
+            {
+                SendRequestPCInfo();
+            },
+            null,
+            0,
+            30000);
         }
     }
 }

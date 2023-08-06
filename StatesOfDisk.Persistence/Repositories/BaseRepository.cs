@@ -16,11 +16,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     
     public void Create(T entity)
     {
+        entity.DateCreated = DateTime.Now;
         Context.Add(entity);
     }
 
     public void Update(T entity)
     {
+        entity.DateUpdated = DateTime.Now;
         Context.Update(entity);
     }
 
@@ -30,9 +32,9 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
         Context.Update(entity);
     }
 
-    public Task<T> Get(Guid id, CancellationToken cancellationToken)
+    public Task<T> Get(string id, CancellationToken cancellationToken)
     {
-        return Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return Context.Set<T>().FirstOrDefaultAsync(x => x.Id  == id, cancellationToken);
     }
 
     public Task<List<T>> GetAll(CancellationToken cancellationToken)

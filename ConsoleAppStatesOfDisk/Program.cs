@@ -8,7 +8,18 @@
 
 //Console.WriteLine("Received response: " + response);
 using ConsoleAppStatesOfDisk;
+using System.Net.NetworkInformation;
+using System.Threading;
 
 Console.WriteLine(DiskViewer.GetDiskCFreeSpace());
 Console.WriteLine(DiskViewer.GetComputerName());
+
+string connectionString = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+Console.WriteLine(connectionString);
+
+using(var client = Client.Instance)
+{
+    client.SendRequestPCInfoInTimer();
+    Console.ReadKey();
+}
 

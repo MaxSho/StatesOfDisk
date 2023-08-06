@@ -13,6 +13,6 @@ public class PCInfoRepository : BaseRepository<PCInfo>, IPCInfoRepository
     
     public Task<PCInfo> GetByEmail(string email, CancellationToken cancellationToken)
     {
-        return Context.PCInfo.FirstOrDefaultAsync(x => x.ComputerNane == email, cancellationToken);
+        return Context.PCInfo.FirstOrDefaultAsync(x => x.ComputerName == email, cancellationToken);
     }
 }
